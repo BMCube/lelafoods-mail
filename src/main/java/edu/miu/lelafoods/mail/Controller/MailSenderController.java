@@ -1,6 +1,7 @@
 package edu.miu.lelafoods.mail.Controller;
 
 import edu.miu.lelafoods.mail.domain.Cart;
+import edu.miu.lelafoods.mail.domain.CartDto;
 import edu.miu.lelafoods.mail.domain.Food;
 import edu.miu.lelafoods.mail.domain.Order;
 import edu.miu.lelafoods.mail.service.NotificationService;
@@ -13,6 +14,8 @@ import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -28,52 +31,33 @@ public class MailSenderController {
     NotificationService notificationService;
 
 
-
-
     @PostMapping("/email")
     public @ResponseBody
-    ResponseEntity sendSimpleEmail(
-                                    final Locale locale){
+    ResponseEntity sendSimpleEmail(@RequestBody CartDto cartDto, HttpServletRequest request
+    ) throws URISyntaxException
+        {
+
+            String subject = "";
+            if (cartDto.getStatus() != null) {
+                subject = cartDto.getStatus() +" Order";
+            }
 
 
-        Food food = new Food();
-        food.setPrice(12.4);
-        food.setName("Pasta");
-        Order order1 = new Order();
-        order1.setFood(food);
-        order1.setOrderQuantity(2);
-       String recipientEmail = "biruk.bekele@gmail.com";
-       String recipientSender= "mail.eatest@gmail.com";
+            try {
+                String recipientSender = "mail.eatest@gmail.com";
+                String recipientEmail = cartDto.getCustomer().getUsername();
+                notificationService.sendNotification(
+                        recipientSender, recipientEmail,
+                        cartDto, subject, new Locale("en"));
 
-        List<Order> orders = new ArrayList<>();
-        orders.add(order1);
-        Cart cart = new Cart();
-        cart.setOrderStatus("New Order");
-//        here you can map the reciverName= cart.customer.getname();
-//        String reciverName = "Brck_test";
-        cart.setCustomerName("Brck_test");
 
-        String subject="";
-        if(cart.getOrderStatus()!=null){
-            subject=cart.getOrderStatus();
+            } catch (MailException | MessagingException mailException) {
+                LOG.error("Error while sending out email..{}", mailException.getStackTrace());
+                return new ResponseEntity<>("Unable to send email", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            return new ResponseEntity<>("Please check your inbox", HttpStatus.OK);
         }
-        cart.setOrder(orders);
-
-       try {
-
-
-        notificationService.sendNotification(
-                recipientSender,  recipientEmail,
-                cart, subject,new Locale("en"));
-
 
     }
-       catch (MailException | MessagingException mailException) {
-           LOG.error("Error while sending out email..{}", mailException.getStackTrace());
-           return new ResponseEntity<>("Unable to send email", HttpStatus.INTERNAL_SERVER_ERROR);
-       }
 
-        return new ResponseEntity<>("Please check your inbox", HttpStatus.OK);
-    }
-
-}
