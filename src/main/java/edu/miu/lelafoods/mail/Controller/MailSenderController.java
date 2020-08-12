@@ -34,6 +34,8 @@ public class MailSenderController {
     public @ResponseBody
     ResponseEntity sendSimpleEmail(
                                     final Locale locale){
+
+
         Food food = new Food();
         food.setPrice(12.4);
         food.setName("Pasta");
@@ -47,6 +49,10 @@ public class MailSenderController {
         orders.add(order1);
         Cart cart = new Cart();
         cart.setOrderStatus("New Order");
+//        here you can map the reciverName= cart.customer.getname();
+//        String reciverName = "Brck_test";
+        cart.setCustomerName("Brck_test");
+
         String subject="";
         if(cart.getOrderStatus()!=null){
             subject=cart.getOrderStatus();
