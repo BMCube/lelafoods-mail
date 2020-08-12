@@ -7,23 +7,26 @@
 <body>
 <div style="font-size:20px"><em>Lela Foods</em>
     <div style="text-indent: 8em;">
-       <b> Fast.Fresh convenient</b>
+
     </div>
 <!--    <p th:text="#{greeting (${receivername})}"/>-->
-    <p>Dear:  <span th:text="${cart.customerName}"></span></p>
-    <p> Order status: </p> <span th:text="${cart.orderStatus}"></span></p>
-    <p>Here are the details of your order:</p>
+    <p>Dear  <span th:text="${cart.customer.firstName}"></span>,</p>
+<!--    <p> Order status:  <span th:text="${cart.status}"></span></p>-->
+    <p>Here is your order from  <span th:text="${cart.restaurant.name}"></span></p>
+    <p>The details of your order:</p>
 <!--    <b>Resturant Name: </b> <span th:text="${resturant.name}"></span>-->
     <div th:each="order: ${cart.order}" >
         <div style="text-indent: 3em;">
-            <p><b>FoodOrderd: </b> <span th:text="${order.food.name}"></span></p>
+
+            <p><b>Food Orderd: </b> <span th:text="${order.food.name}"></span></p>
             <p><b>Price: </b> <span th:text="${order.food.price}"></span></p>
-            <p><b>Total: </b> <span th:text="${order.food.total}"></span></p>
+<!--            <p><b>Total: </b> <span th:text="${order.food.total}"></span></p>-->
+            <p><b>orderQuantity: </b> <span th:text="${order.orderQuantity}"></span></p>
         </div>
-        <p><b>orderQuantity: </b> <span th:text="${order.orderQuantity}"></span></p>
+
     </div>
     <br /><p>
-        <b>Always online</b>
+        <b> Fast.Fresh convenient</b>
     </p>
 
     <p><br />
