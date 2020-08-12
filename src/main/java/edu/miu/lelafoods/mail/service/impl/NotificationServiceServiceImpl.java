@@ -1,6 +1,5 @@
 package edu.miu.lelafoods.mail.service.impl;
 
-import edu.miu.lelafoods.mail.domain.Cart;
 import edu.miu.lelafoods.mail.domain.CartDto;
 import edu.miu.lelafoods.mail.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;

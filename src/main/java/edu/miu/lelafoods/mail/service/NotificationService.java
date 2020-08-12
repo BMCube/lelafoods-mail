@@ -1,6 +1,5 @@
 package edu.miu.lelafoods.mail.service;
 
-import edu.miu.lelafoods.mail.domain.Cart;
 import edu.miu.lelafoods.mail.domain.CartDto;
 
 import javax.mail.MessagingException;
