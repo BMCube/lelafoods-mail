@@ -1,6 +1,7 @@
 package edu.miu.lelafoods.mail.service.impl;
 
 import edu.miu.lelafoods.mail.domain.Cart;
+import edu.miu.lelafoods.mail.domain.CartDto;
 import edu.miu.lelafoods.mail.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -27,11 +28,11 @@ public class NotificationServiceServiceImpl implements NotificationService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    public void sendNotification(String from,  final String recipientEmail,  Cart cart, String subject, final Locale locale)  throws MessagingException {
+    public void sendNotification(String from, final String recipientEmail, CartDto cartDto, String subject, final Locale locale)  throws MessagingException {
         {
             final Context thymeContext = new Context(locale);
 //            thymeContext.setVariable("receivername", name);
-            thymeContext.setVariable("cart", cart);
+            thymeContext.setVariable("cart", cartDto);
             final MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
             final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
             message.setSubject(subject);
