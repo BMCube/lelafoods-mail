@@ -27,10 +27,10 @@ public class NotificationServiceServiceImpl implements NotificationService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    public void sendNotification(String from,  final String recipientEmail, Cart cart, String subject, final Locale locale)  throws MessagingException {
+    public void sendNotification(String from,  final String recipientEmail,  Cart cart, String subject, final Locale locale)  throws MessagingException {
         {
             final Context thymeContext = new Context(locale);
-            //thymeContext.setVariable("name", toName);
+//            thymeContext.setVariable("receivername", name);
             thymeContext.setVariable("cart", cart);
             final MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
             final MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");

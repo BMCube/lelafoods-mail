@@ -9,7 +9,8 @@
     <div style="text-indent: 8em;">
        <b> Fast.Fresh convenient</b>
     </div>
-<!--    <p th:text="#{Dear(${customer.name})}"/>-->
+<!--    <p th:text="#{greeting (${receivername})}"/>-->
+    <p>Dear:  <span th:text="${cart.customerName}"></span></p>
     <p> Order status: </p> <span th:text="${cart.orderStatus}"></span></p>
     <p>Here are the details of your order:</p>
 <!--    <b>Resturant Name: </b> <span th:text="${resturant.name}"></span>-->
