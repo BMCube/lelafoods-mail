@@ -1,8 +1,6 @@
 package edu.miu.lelafoods.mail.Controller;
 
 import edu.miu.lelafoods.mail.domain.CartDto;
-import edu.miu.lelafoods.mail.domain.Food;
-import edu.miu.lelafoods.mail.domain.Order;
 import edu.miu.lelafoods.mail.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 
