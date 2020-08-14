@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Template for Sending email </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div style="font-size:20px"><em>Lela Foods</em>
+    <div style="text-indent: 8em;">
+
+    </div>
+<!--    <p th:text="#{greeting (${receivername})}"/>-->
+    <p>Dear  <span th:text="${cart.customer.firstName}"></span>,</p>
+<!--    <p> Order status:  <span th:text="${cart.status}"></span></p>-->
+    <p>Here is your order from  <span th:text="${cart.restaurant.name}"></span></p>
+    <p>The details of your order:</p>
+<!--    <b>Resturant Name: </b> <span th:text="${resturant.name}"></span>-->
+    <div th:each="order: ${cart.order}" >
+        <div style="text-indent: 3em;">
+
+            <p><b>Food Orderd: </b> <span th:text="${order.food.name}"></span></p>
+            <p><b>Price: </b> <span th:text="${order.food.price}"></span></p>
+<!--            <p><b>Total: </b> <span th:text="${order.food.total}"></span></p>-->
+            <p><b>orderQuantity: </b> <span th:text="${order.orderQuantity}"></span></p>
+        </div>
+
+    </div>
+    <br /><p>
+        <b> Fast.Fresh convenient</b>
+    </p>
+
+    <p><br />
+        Thanks for your order, <br />
+<!--        &emsp; <em><b></b></em>-->
+<!--    <div style="font-size:20px"><em></em>-->
+<!--        <div style="text-indent: 8em;">-->
+<!--            <img src="../templates/images/logo.png"  height="80" width="80" />-->
+<!--        </div>-->
+    </p>
+</div>
+</body>
+</html>
